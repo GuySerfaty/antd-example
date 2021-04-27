@@ -1,0 +1,43 @@
+name: PR Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-client:
+    name: Start & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    env:
+      REACT_APP_NODE_ENV: test
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Setup node  (Node.js ${{ matrix.node-version }})
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm install
+      - name: start React server
+        run: npm run start & npx wait-on http://localhost:3000
+      - name: run Tests
+        run: npm run test
+      - name: Save Diffs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: snapshots diffs
+          path: |
+            client/screenshots/temp/*.png
+            client/screenshots/temp/*/*.png
+          if-no-files-found: warn
