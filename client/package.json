@@ -16,9 +16,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:in:docker": "HEADLESS=true RUN_IN_DOCKER=true jest --passWithNoTests --maxWorkers=3",
+    "test:docker": "docker run -it -e PUPPETEER_EXECUTABLE_PATH=\"/usr/bin/google-chrome-stable\" --net=host -v ${PWD}:/e2e -w /e2e --entrypoint npm buildkite/puppeteer:latest run test:in:docker",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
