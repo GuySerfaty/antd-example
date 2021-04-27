@@ -77,9 +77,14 @@ const takeScreenshot = async (testName, folderPath, page) => {
 };
 
 const BASE_CONFIG = { width: VIEW_WIDTH, height: VIEW_HEIGHT };
+const delay = (secs) =>
+  new Promise((resolve) => setTimeout(resolve, secs * 1000));
+const BASE_URL = "http://localhost:3000";
 
 module.exports = {
   takeScreenshot,
   BASE_PATH,
   BASE_CONFIG,
+  delay,
+  BASE_URL,
 };
