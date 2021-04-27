@@ -19,17 +19,21 @@ describe("API testing - ingredients", () => {
 describe("API testing - cocktails", () => {
   test("Should return cocktails by the ingredient and call thecocktaildb API", async () => {
     const mockIngredient = 'Vodka';
-    const scope = await nock('https://www.thecocktaildb.com/api/json/v1/1/')
+    const thecocktaildbMock = await nock('https://www.thecocktaildb.com/api/json/v1/1/')
       .get(`/filter.php?i=${mockIngredient}`)
       .reply(200, mocks.filterApiResponse)
 
-      const response = await request(app)
-        .get(`/api/cocktails?ingredient=${mockIngredient}`)
+    const response = await request(app)
+      .get(`/api/cocktails?ingredient=${mockIngredient}`)
 
-      expect(response.body.length).toBe(mocks.filterApiResponse.drinks.length);
+    expect(response.body.length).toBe(mocks.filterApiResponse.drinks.length);
 
-      // Check if the mapping works
-      expect(response.body[0].name).toBe(mocks.filterApiResponse.drinks[0].strDrink);
+    // Check if the mapping works
+    expect(response.body[0].name).toBe(mocks.filterApiResponse.drinks[0].strDrink);
+
+    // Check the API was called
+    thecocktaildbMock.done()
+    
   });
 });
 
