@@ -3,3 +3,8 @@
   height: 400px;
   margin: 10px;
 }
+
+.go-back-container {
+  display: flex;
+  align-items: center;
+}
