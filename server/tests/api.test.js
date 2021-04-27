@@ -27,6 +27,9 @@ describe("API testing - cocktails", () => {
         .get(`/api/cocktails?ingredient=${mockIngredient}`)
 
       expect(response.body.length).toBe(mocks.filterApiResponse.drinks.length);
+
+      // Check if the mapping works
+      expect(response.body[0].name).toBe(mocks.filterApiResponse.drinks[0].strDrink);
   });
 });
 

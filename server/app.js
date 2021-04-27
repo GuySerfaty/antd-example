@@ -15,6 +15,13 @@ const INGREDIENTS = [
     image: "https://www.thecocktaildb.com/images/ingredients/gin-Small.png",
   },
 ];
+
+const cocktailConvertor = (cocktail) => ({
+  name: cocktail.strDrink,
+  image: cocktail.strDrinkThumb,
+  id: cocktail.idDrink,
+})
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -30,7 +37,7 @@ app.get("/api/cocktails", async (req, res) => {
     data: { drinks: cocktails },
   } = await axios.get(`${ART_API}/filter.php?i=${req.query.ingredient}`);
   console.log("cocktails", cocktails);
-  res.send(cocktails);
+  res.send(cocktails.map(cocktail => cocktailConvertor(cocktail)));
 });
 
 app.get("/api/cocktails/:cocktailId", async (req, res) => {
