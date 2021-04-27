@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { IngredientsListMock } from "../../mocks";
-import { Spin } from "antd";
-import "antd/dist/antd.css";
-import "./IngredientsList.css";
 import IngredientCard from "../../componets/IngredientCard/IngredientCard";
+import Container from "../../componets/Container";
 
 const IngredientsList = () => {
   const [loading, setLoading] = useState(true);
@@ -12,11 +9,8 @@ const IngredientsList = () => {
     (async () => {
       try {
         const list = await fetch("/api/ingredients");
-
         const jsonedList = await list.json();
-        console.log(jsonedList);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setIngredientsList(IngredientsListMock);
+        setIngredientsList(jsonedList);
       } catch ({ message }) {
         console.log(message);
       } finally {
@@ -26,12 +20,11 @@ const IngredientsList = () => {
   }, []);
 
   return (
-    <div className="ingredients-list-container">
-      {loading && <Spin size="large" spinning />}
+    <Container loading={loading}>
       {ingredientsList.map(({ name, image, id }) => (
         <IngredientCard key={id} image={image} id={id} name={name} />
       ))}
-    </div>
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import "antd/dist/antd.css";
 import IngredientsList from "./pages/IngredientsList/IngredientsList";
 import OneIngredient from "./pages/OneIngredient/OneIngredient";
 
