@@ -40,6 +40,7 @@ describe("Screenshot testing", () => {
       .reply(200, MOCK_INGREDIENTS);
     await page.goto(BASE_URL);
     await page.setViewport(BASE_CONFIG);
+
     await new Promise((r) => setTimeout(r, 5000))
     await takeScreenshot("example", folderPath, page);
   });
