@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+
 app.get('/api/ingredients', async (req, res) => {
   res.send(INGREDIENTS);
 })
