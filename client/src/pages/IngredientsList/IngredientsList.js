@@ -4,7 +4,7 @@ import Container from "../../componets/Container";
 
 const Footer = () => (
   <div style={{ position: 'absolute', bottom: 0, width: '100%', textAlign: 'center' }}>
-    <h2>THIS IS THE BEST FOOTER IN 2021</h2>
+    <h2>THIS IS THE BEST FOOTER IN 2020</h2>
   </div>
 )
 
