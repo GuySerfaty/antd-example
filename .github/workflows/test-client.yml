@@ -28,11 +28,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: npm install
+        run: PUPPETEER_SKIP_DOWNLOAD=true npm install
       - name: start React server
         run: npm run start & npx wait-on http://localhost:3000
       - name: run Tests
-        run: npm run test
+        run: PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable" npm run test
       - name: Save Diffs
         if: failure()
         uses: actions/upload-artifact@v2
