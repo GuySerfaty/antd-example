@@ -27,8 +27,6 @@ const OneIngredient = () => {
     })();
   }, []);
 
-  console.log("object", params);
-
   return (
     <>
       <div className="go-back-container">

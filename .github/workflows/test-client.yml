@@ -1,4 +1,4 @@
-name: PR Tests
+name: test-client
 
 on:
   pull_request:
@@ -12,6 +12,7 @@ jobs:
     defaults:
       run:
         working-directory: client
+    container: buildkite/puppeteer:latest
     env:
       REACT_APP_NODE_ENV: test
     strategy:

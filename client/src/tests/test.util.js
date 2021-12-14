@@ -77,9 +77,23 @@ const takeScreenshot = async (testName, folderPath, page) => {
 };
 
 const BASE_CONFIG = { width: VIEW_WIDTH, height: VIEW_HEIGHT };
+const delay = (secs) =>
+  new Promise((resolve) => setTimeout(resolve, secs * 1000));
+
+const CLIENT_HOST =
+  process.env.RUN_IN_DOCKER && !process.env.RUN_IN_CI
+    ? "host.docker.internal"
+    : "localhost";
+
+const PORT = 3000;
+
+const CLIENT_URL = `http://${CLIENT_HOST}:${PORT}`;
+
 
 module.exports = {
   takeScreenshot,
   BASE_PATH,
   BASE_CONFIG,
+  CLIENT_URL,
+  delay,
 };
